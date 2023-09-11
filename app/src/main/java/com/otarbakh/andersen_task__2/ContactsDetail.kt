@@ -10,7 +10,7 @@ data class ContactsDetail(
     val phoneNumber:String
 ):Parcelable
 
-val contactsList = arrayOf <ContactsDetail>(
+val contactsList = listOf <ContactsDetail>(
     ContactsDetail("Guga","Beriashvili", "555 55 55 44"),
     ContactsDetail("Vaja","Sanadiradze", "595 11 12 33"),
     ContactsDetail("Giorgi","Dzocenidze", "595 49 49 49"),

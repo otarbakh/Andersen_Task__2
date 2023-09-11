@@ -41,16 +41,17 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
             val contactsDetailsFragment = ContactsDetailsFragment()
             val bundle = Bundle()
-            bundle.putParcelable("contactsList",contactsList)
+
+            bundle.putSerializable("contactsList", contactsList.toTypedArray())
+
             contactsDetailsFragment.arguments = bundle
 
 
 
             val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, ContactsDetailsFragment())
+            transaction.replace(R.id.fragment_container, contactsDetailsFragment)
             transaction.addToBackStack(null) // Optional: Add to back stack for back navigation
             transaction.commit()
-
 
         }
     }
