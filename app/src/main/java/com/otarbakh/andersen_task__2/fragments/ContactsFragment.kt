@@ -42,7 +42,9 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
             val contactsDetailsFragment = ContactsDetailsFragment()
             val bundle = Bundle()
 
-            bundle.putSerializable("contactsList", contactsList.toTypedArray())
+            bundle.putString("name", contactsDetail.name)
+            bundle.putString("surname", contactsDetail.surname)
+            bundle.putString("number", contactsDetail.phoneNumber)
 
             contactsDetailsFragment.arguments = bundle
 
