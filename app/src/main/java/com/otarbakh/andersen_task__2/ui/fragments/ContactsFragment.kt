@@ -1,13 +1,12 @@
-package com.otarbakh.andersen_task__2.fragments
+package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.otarbakh.andersen_task__2.ContactsAdapter
-import com.otarbakh.andersen_task__2.ContactsDetail
+import com.otarbakh.andersen_task__2.ui.adapter.ContactsAdapter
 import com.otarbakh.andersen_task__2.R
-import com.otarbakh.andersen_task__2.contactsList
+import com.otarbakh.andersen_task__2.data.contactsList
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 
 class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentBinding::inflate) {

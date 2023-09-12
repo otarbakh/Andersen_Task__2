@@ -1,4 +1,4 @@
-package com.otarbakh.andersen_task__2.fragments
+package com.otarbakh.andersen_task__2.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.otarbakh.andersen_task__2.databinding.ActivityMainBinding
-import com.otarbakh.andersen_task__2.fragments.ContactsDetailsFragment
-import com.otarbakh.andersen_task__2.fragments.ContactsFragment
+import com.otarbakh.andersen_task__2.ui.fragments.ContactsDetailsFragment
+import com.otarbakh.andersen_task__2.ui.fragments.ContactsFragment
 
 class MainActivity : AppCompatActivity() {
 

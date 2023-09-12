@@ -1,9 +1,6 @@
-package com.otarbakh.andersen_task__2.fragments
+package com.otarbakh.andersen_task__2.ui.fragments
 
-import android.util.Log
-import androidx.fragment.app.Fragment
-import com.otarbakh.andersen_task__2.ContactsDetail
-import com.otarbakh.andersen_task__2.contactsList
+
 import com.otarbakh.andersen_task__2.databinding.ContactDetailsFragmentBinding
 
 class ContactsDetailsFragment :
