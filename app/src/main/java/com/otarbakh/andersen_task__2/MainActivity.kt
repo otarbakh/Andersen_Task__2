@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction
 import com.otarbakh.andersen_task__2.databinding.ActivityMainBinding
 import com.otarbakh.andersen_task__2.ui.fragments.ContactsDetailsFragment
 import com.otarbakh.andersen_task__2.ui.fragments.ContactsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

@@ -1,6 +1,7 @@
 package com.otarbakh.andersen_task__2.data.repository
 
 import com.otarbakh.andersen_task__2.data.ContactsDetail
+import dagger.Provides
 
 import kotlinx.coroutines.flow.Flow
 
