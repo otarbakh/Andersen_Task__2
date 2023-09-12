@@ -1,7 +1,8 @@
-package com.otarbakh.andersen_task__2.data.di
+package com.otarbakh.andersen_task__2.di
 
 import android.content.Context
 import androidx.room.Room
+import com.otarbakh.andersen_task__2.common.Constants.dataBaseName
 import com.otarbakh.andersen_task__2.data.database.DataBase
 import com.otarbakh.andersen_task__2.data.database.UserDao
 import dagger.Module
@@ -22,7 +23,7 @@ object DataBaseModule {
     fun provideDb(@ApplicationContext context: Context): DataBase {
         return Room.databaseBuilder(
             context,
-            DataBase::class.java,"UserContact",
+            DataBase::class.java, dataBaseName,
         ).fallbackToDestructiveMigration()
             .build()
     }

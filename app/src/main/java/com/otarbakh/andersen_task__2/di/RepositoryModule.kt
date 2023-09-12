@@ -1,6 +1,6 @@
-package com.otarbakh.andersen_task__2.data.di
+package com.otarbakh.andersen_task__2.di
 
-import com.otarbakh.andersen_task__2.data.repository.ContactsRepository
+import com.otarbakh.andersen_task__2.domain.ContactsRepository
 import com.otarbakh.andersen_task__2.data.repository.ContactsRepositoryImpl
 import dagger.Binds
 import dagger.Module

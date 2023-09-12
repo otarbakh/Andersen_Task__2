@@ -5,7 +5,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.otarbakh.andersen_task__2.data.ContactsDetail
+import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
+import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
+import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
+import com.otarbakh.andersen_task__2.R
+import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactDetailsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +23,9 @@ class ContactsDetailsFragment :
     override fun viewCreated() {
 
 
-        val name = arguments?.getString("name")
-        val surname = arguments?.getString("surname")
-        val number = arguments?.getString("number")
+        val name = arguments?.getString(nameBundleKey)
+        val surname = arguments?.getString(surnameBundleKey)
+        val number = arguments?.getString(numberBundleKey)
 
         binding.apply {
             tvPhone.text = number
@@ -29,39 +33,35 @@ class ContactsDetailsFragment :
             tvSurname.text = surname
         }
 
-
-
-
-//        if (contactsList != null) {
-//            // Handle the data, e.g., display it in a TextView
-//            val contactDetails = contactsList.joinToString("\n") { "${it.name} ${it.surname}: ${it.phoneNumber}" }
-//            binding.tvPhone.text = contactDetails
-//        }
     }
 
 
-    private fun updateContact(){
+    private fun updateContact() {
         val receiveID = arguments?.getInt("id")
 
         binding.save.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.updateContact(contact = ContactsDetail(
-                        receiveID!!,
-                        name =  binding.editName.text.toString(),
-                        surname = binding.ediSurname.text.toString(),
-                        phoneNumber = binding.editNumber.text.toString()
-                    ) )
+                    viewModel.updateContact(
+                        contact = ContactsDetail(
+                            receiveID!!,
+                            name = binding.editName.text.toString(),
+                            surname = binding.ediSurname.text.toString(),
+                            phoneNumber = binding.editNumber.text.toString()
+                        )
+                    )
+
                 }
             }
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, ContactsFragment())
+            transaction.commit()
         }
-
-
     }
-
 
 
     override fun listeners() {
         updateContact()
+
     }
 }

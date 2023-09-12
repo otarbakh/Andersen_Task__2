@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.otarbakh.andersen_task__2.data.ContactsDetail
+import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.SingleContactFragmentBinding
 
 
@@ -47,11 +47,10 @@ class ContactsAdapter :
 
 
     }
+
     fun setOnItemClickListener(clickListener: (ContactsDetail, Int) -> Unit) {
         itemClickListener = clickListener
     }
-
-
 
 
     class RidesDiffCallback : DiffUtil.ItemCallback<ContactsDetail>() {

@@ -9,7 +9,9 @@
 
     <TextView
         android:id="@+id/tv_phone"
+        android:layout_margin="15dp"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="Phone: (123) 456-7890"
         android:textSize="16sp"
@@ -21,6 +23,8 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
         android:text="jeims"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,6 +35,8 @@
         android:id="@+id/tv_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:text="jajanidze"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,14 +47,19 @@
         android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:hint="name"/>
+
     <EditText
         android:id="@+id/ediSurname"
+        android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Surname"/>
+
     <EditText
         android:id="@+id/editNumber"
+        android:layout_margin="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="555 40  454 45"/>
@@ -56,7 +67,8 @@
 
     <Button
         android:id="@+id/save"
-        android:layout_width="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "Save"/>
 
