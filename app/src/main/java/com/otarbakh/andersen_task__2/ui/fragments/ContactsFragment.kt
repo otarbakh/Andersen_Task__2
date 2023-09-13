@@ -8,12 +8,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.otarbakh.Pref
 import com.otarbakh.andersen_task__2.common.Constants.idBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
 import com.otarbakh.andersen_task__2.ui.adapter.ContactsAdapter
 import com.otarbakh.andersen_task__2.R
+import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,6 +62,8 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
     private fun gotoDetails() {
         contactsAdapter.setOnItemClickListener { contactsDetail, i ->
 
+            Pref.savePhoneNumber(requireContext(),contactsDetail.phoneNumber)
+
             val contactsDetailsFragment = ContactsDetailsFragment()
             val bundle = Bundle()
             bundle.putInt(idBundleKey, contactsDetail.id)
@@ -71,7 +75,8 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
 
             val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, contactsDetailsFragment)
+            transaction.replace(R.id.fullScreen_fragment, contactsDetailsFragment)
+            transaction.addToBackStack(null)
             transaction.commit()
 
         }
