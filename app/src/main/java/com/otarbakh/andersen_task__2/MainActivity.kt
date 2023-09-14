@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             binding.leftFragment.visibility = View.VISIBLE
             binding.rightFragment.visibility = View.VISIBLE
         } else {
-            // Load only the contact list fragment in portrait mode
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fullScreen_fragment, ContactsFragment())
                 .commit()
