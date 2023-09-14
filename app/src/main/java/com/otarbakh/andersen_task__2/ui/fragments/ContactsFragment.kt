@@ -2,20 +2,18 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.otarbakh.Pref
 import com.otarbakh.andersen_task__2.common.Constants.idBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
 import com.otarbakh.andersen_task__2.ui.adapter.ContactsAdapter
 import com.otarbakh.andersen_task__2.R
-import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +24,7 @@ import kotlinx.coroutines.launch
 class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentBinding::inflate) {
 
     private val contactsAdapter: ContactsAdapter by lazy { ContactsAdapter() }
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
     override fun viewCreated() {
         getContacts()
 
@@ -62,7 +60,11 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
     private fun gotoDetails() {
         contactsAdapter.setOnItemClickListener { contactsDetail, i ->
 
-            Pref.savePhoneNumber(requireContext(),contactsDetail.phoneNumber)
+            lifecycleScope.launch {
+                viewModel.setPhoneNumber(contactsDetail)
+            }
+
+
 
             val contactsDetailsFragment = ContactsDetailsFragment()
             val bundle = Bundle()

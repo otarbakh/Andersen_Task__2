@@ -1,32 +1,35 @@
 package com.otarbakh.andersen_task__2.ui.fragments
 
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.otarbakh.Pref
-import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
-import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
-import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
-import com.otarbakh.andersen_task__2.R
-import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactDetailsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ContactsDetailsFragment :
     BaseFragment<ContactDetailsFragmentBinding>(ContactDetailsFragmentBinding::inflate) {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
     override fun viewCreated() {
 
-        binding.save.setOnClickListener {
-            binding.tvPhone.text = Pref.getPhoneNumber(requireContext())
-        }
 
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.getPhoneNumber().collectLatest {
+                    binding.tvPhone.text = it.phoneNumber
+                    binding.tvName.text = it.name
+                    binding.tvSurname.text = it.surname
+                }
+            }
+        }
 
 
 //        val name = arguments?.getString(nameBundleKey)
