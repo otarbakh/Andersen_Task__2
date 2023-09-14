@@ -2,6 +2,7 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -49,27 +50,26 @@ class ContactsDetailsFragment :
 
             if (isLandscape) {
 
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                            viewModel.getPhoneNumber().collectLatest {data ->
-                                binding.tvPhone.text = data.phoneNumber
-                                binding.tvName.text = data.name
-                                binding.tvSurname.text = data.surname
-                                binding.save.setOnClickListener{
-                                    viewModel.updateContact(
-                                        ContactsDetail(
-                                            data.id,
-                                            data.name,
-                                            data.surname,
-                                            data.phoneNumber
-                                        )
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        viewModel.getPhoneNumber().collectLatest { data ->
+                            binding.tvPhone.text = data.phoneNumber
+                            binding.tvName.text = data.name
+                            binding.tvSurname.text = data.surname
+                            binding.save.setOnClickListener {
+                                Log.d("modiak","Shemovida Save shii")
+                                viewModel.updateContact(
+                                    ContactsDetail(
+                                        data.id,
+                                        binding.editName.text.toString(),
+                                        binding.ediSurname.text.toString(),
+                                        binding.tvPhone.text.toString()
                                     )
-                                }
-
+                                )
                             }
-
                         }
                     }
+                }
 
 
             } else {
@@ -82,7 +82,7 @@ class ContactsDetailsFragment :
     private fun updateContact() {
         val receiveID = arguments?.getInt("id")
 
-        binding.save.setOnClickListener {
+        binding.save.setOnClickListener() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.updateContact(
@@ -98,6 +98,7 @@ class ContactsDetailsFragment :
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fullScreen_fragment, ContactsFragment())
             transaction.commit()
+
         }
     }
 
