@@ -57,7 +57,7 @@ class ContactsDetailsFragment :
                             binding.tvName.text = data.name
                             binding.tvSurname.text = data.surname
                             binding.save.setOnClickListener {
-                                Log.d("modiak","Shemovida Save shii")
+                                Log.d("modiak", "Shemovida Save shii")
                                 viewModel.updateContact(
                                     ContactsDetail(
                                         data.id,

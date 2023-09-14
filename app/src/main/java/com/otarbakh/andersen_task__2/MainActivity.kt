@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
         if (isLandscape) {
-            // Load both fragments in landscape mode
             supportFragmentManager.beginTransaction()
                 .replace(R.id.left_fragment, ContactsFragment())
                 .replace(R.id.right_fragment, ContactsDetailsFragment())
@@ -46,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fullScreen_fragment, ContactsFragment())
-//        transaction.replace(R.id.right_fragment, ContactsDetailsFragment())
         transaction.commit()
 
 

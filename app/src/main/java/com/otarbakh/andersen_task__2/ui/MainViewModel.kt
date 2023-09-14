@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
         phoneNumberFlow.emit(contactsDetail)
     }
 
-    fun getPhoneNumber(): Flow<ContactsDetail>{
+    fun getPhoneNumber(): Flow<ContactsDetail> {
         return phoneNumberFlow
     }
 

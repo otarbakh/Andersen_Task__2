@@ -65,7 +65,6 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
             }
 
 
-
             val contactsDetailsFragment = ContactsDetailsFragment()
             val bundle = Bundle()
             bundle.putInt(idBundleKey, contactsDetail.id)
