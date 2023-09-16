@@ -15,6 +15,7 @@ class ContactsAdapter :
     ) {
 
     private lateinit var itemClickListener: (ContactsDetail, Int) -> Unit
+    private lateinit var itemClickForDeleteListener: (ContactsDetail, Int) -> Unit
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int,
@@ -42,6 +43,10 @@ class ContactsAdapter :
                 binding.contactView.setOnClickListener {
                     itemClickListener.invoke(model!!, adapterPosition)
                 }
+                binding.contactView.setOnLongClickListener {
+                    itemClickForDeleteListener.invoke(model!!, adapterPosition)
+                    true
+                }
             }
         }
 
@@ -50,6 +55,10 @@ class ContactsAdapter :
 
     fun setOnItemClickListener(clickListener: (ContactsDetail, Int) -> Unit) {
         itemClickListener = clickListener
+    }
+
+    fun setOnDeleteClickListener(clickListener: (ContactsDetail, Int) -> Unit) {
+        itemClickForDeleteListener = clickListener
     }
 
 

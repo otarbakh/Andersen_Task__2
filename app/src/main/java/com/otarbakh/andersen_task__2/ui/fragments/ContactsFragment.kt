@@ -3,12 +3,21 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 import android.os.Bundle
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.DOWN
+import androidx.recyclerview.widget.ItemTouchHelper.LEFT
+import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
+import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.otarbakh.andersen_task__2.common.Constants.idBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
@@ -30,7 +39,6 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun viewCreated() {
-
         getContacts()
     }
 
@@ -38,6 +46,7 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
     override fun listeners() {
         gotoDetails()
         searchContactByQuery()
+        delete()
     }
 
     private fun getContacts() {
@@ -117,6 +126,12 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                 return true
             }
         })
+    }
+
+    private fun delete() {
+        contactsAdapter.setOnDeleteClickListener { contactsDetail, i ->
+            viewModel.delete(contactsDetail)
+        }
     }
 
 }

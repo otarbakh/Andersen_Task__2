@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Andersen_Task__2</string>
     <string name="search_here">search_here</string>
+    <string name="deleted_task">Deleted task</string>
+    <string name="undo">Undo</string>
+    <string name="delete_contact_confirmation">Delete Contact?</string>
+    <string name="deleted">deleted!</string>
 </resources>

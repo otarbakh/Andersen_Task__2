@@ -51,7 +51,18 @@ class MainViewModel @Inject constructor(
 
     fun insert(contact: ContactsDetail) {
         viewModelScope.launch(Dispatchers.IO) {
+            contactsRepository.insertContact(contact)
+        }
+    }
+
+    fun upsertContact(contact: ContactsDetail) {
+        viewModelScope.launch(Dispatchers.IO) {
             contactsRepository.upsert(contact)
+        }
+    }
+    fun delete(contact: ContactsDetail) {
+        viewModelScope.launch(Dispatchers.IO) {
+            contactsRepository.deleteContact(contact)
         }
     }
 }
