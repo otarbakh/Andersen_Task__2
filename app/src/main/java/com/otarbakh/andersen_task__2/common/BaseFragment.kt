@@ -1,4 +1,4 @@
-package com.otarbakh.andersen_task__2.ui.fragments
+package com.otarbakh.andersen_task__2.common
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import dagger.hilt.android.AndroidEntryPoint
+
 
 typealias Inflater <T> = (inflater: LayoutInflater, view: ViewGroup?, attach: Boolean) -> T
 

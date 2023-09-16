@@ -2,8 +2,9 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.os.Bundle
+import android.widget.SearchView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -14,6 +15,8 @@ import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
 import com.otarbakh.andersen_task__2.ui.adapter.ContactsAdapter
 import com.otarbakh.andersen_task__2.R
+import com.otarbakh.andersen_task__2.common.BaseFragment
+import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,21 +28,26 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
     private val contactsAdapter: ContactsAdapter by lazy { ContactsAdapter() }
     private val viewModel: MainViewModel by activityViewModels()
-    override fun viewCreated() {
-        getContacts()
 
+    override fun viewCreated() {
+
+        getContacts()
     }
+
 
     override fun listeners() {
         gotoDetails()
+        searchContactByQuery()
     }
 
     private fun getContacts() {
         setupRecycler()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getContacts().collectLatest {
+                viewModel.getContactsFromViewModel()
+                viewModel.state.collectLatest {
                     contactsAdapter.submitList(it)
+
                 }
             }
         }
@@ -81,6 +89,34 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
             transaction.commit()
 
         }
+    }
+
+    private fun searchContact(query: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collectLatest {
+                    val filteredContacts = it.filter {
+                        it.name!!.contains(query, true) or it.surname!!.contains(query, true)
+                    }
+                    contactsAdapter.submitList(filteredContacts)
+                }
+            }
+        }
+    }
+
+
+    private fun searchContactByQuery() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                searchContact(newText)
+                return true
+            }
+        })
     }
 
 }

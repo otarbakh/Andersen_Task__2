@@ -4,11 +4,11 @@ package com.otarbakh.andersen_task__2.ui.fragments
 import android.content.res.Configuration
 import android.util.Log
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.otarbakh.andersen_task__2.R
+import com.otarbakh.andersen_task__2.common.BaseFragment
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
@@ -26,16 +26,13 @@ class ContactsDetailsFragment :
     private val viewModel: MainViewModel by activityViewModels()
     override fun viewCreated() {
 
-
         getContactDetailsOnLandscape()
-
 
         val name = arguments?.getString(nameBundleKey)
         val surname = arguments?.getString(surnameBundleKey)
         val number = arguments?.getString(numberBundleKey)
 
         binding.apply {
-
             tvPhone.text = number
             tvName.text = name
             tvSurname.text = surname
@@ -49,7 +46,6 @@ class ContactsDetailsFragment :
                 resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
             if (isLandscape) {
-
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                         viewModel.getPhoneNumber().collectLatest { data ->
@@ -95,6 +91,8 @@ class ContactsDetailsFragment :
                     )
                 }
             }
+
+
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fullScreen_fragment, ContactsFragment())
             transaction.commit()
@@ -104,7 +102,6 @@ class ContactsDetailsFragment :
 
 
     override fun listeners() {
-
 
     }
 }

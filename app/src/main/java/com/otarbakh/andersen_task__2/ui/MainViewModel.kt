@@ -9,7 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +22,8 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val phoneNumberFlow = MutableSharedFlow<ContactsDetail>()
+    private val _state = MutableStateFlow<List<ContactsDetail>>(emptyList())
+    val state = _state.asSharedFlow()
 
     suspend fun setPhoneNumber(contactsDetail: ContactsDetail) {
 
@@ -29,15 +34,24 @@ class MainViewModel @Inject constructor(
         return phoneNumberFlow
     }
 
+    suspend fun getContactsFromViewModel() {
+        viewModelScope.launch {
+            contactsRepository.getContacts().collectLatest {
+                _state.value = it
+            }
+        }
 
-    suspend fun getContacts(): Flow<List<ContactsDetail>> {
-        return contactsRepository.getContacts()
     }
-
 
     fun updateContact(contact: ContactsDetail) {
         viewModelScope.launch(Dispatchers.IO) {
             contactsRepository.insertContact(contact)
+        }
+    }
+
+    fun insert(contact: ContactsDetail) {
+        viewModelScope.launch(Dispatchers.IO) {
+            contactsRepository.upsert(contact)
         }
     }
 }

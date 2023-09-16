@@ -15,7 +15,6 @@ class ContactsRepositoryImpl @Inject constructor(
 
     ) : ContactsRepository {
 
-
     override suspend fun getContacts(): Flow<List<ContactsDetail>> {
         return contactsDao.getAll()
     }
@@ -36,6 +35,5 @@ class ContactsRepositoryImpl @Inject constructor(
     override suspend fun deleteAll() {
         contactsDao.deleteAll()
     }
-
 
 }
