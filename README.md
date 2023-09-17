@@ -1,8 +1,5 @@
 
 
-
-The goal of this Template is to be our starting point for new projects, following the best development practices. It's our interpretation and adaptation of the official [architecture](https://developer.android.com/topic/architecture) guidelines provided by Google. And it's inspired by Google's [NowInAndroid](https://github.com/android/nowinandroid).
-
 ## Clean architecture with 2 main modules
 - Data (for database, API and preferences code)
 - AndroidApp (for UI logic, with MVVM)
