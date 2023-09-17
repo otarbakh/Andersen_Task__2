@@ -2,7 +2,9 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.content.res.Configuration
+import android.service.autofill.Validators.or
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -54,20 +56,25 @@ class ContactsDetailsFragment :
                             binding.tvName.text = data.name
                             binding.tvSurname.text = data.surname
                             binding.save.setOnClickListener {
-                                Log.d("modiak", "Shemovida Save shii")
-                                viewModel.updateContact(
-                                    ContactsDetail(
-                                        data.id,
-                                        binding.editName.text.toString(),
-                                        binding.ediSurname.text.toString(),
-                                        binding.tvPhone.text.toString(),
-                                        letterInCircle = binding.editName.text.toString().first().uppercase(),
-                                        image = ColorUtils.getRandomColor()
+                                if (binding.editName.text.toString().isEmpty() or binding.tvName.text.toString().isEmpty() ){
+                                    Toast.makeText(requireContext(),"Name is Empty or Nothing is selected" , Toast.LENGTH_SHORT).show()
+
+                                }else{
+                                    viewModel.updateContact(
+                                        ContactsDetail(
+                                            data.id,
+                                            binding.editName.text.toString(),
+                                            binding.ediSurname.text.toString(),
+                                            binding.tvPhone.text.toString(),
+                                            letterInCircle = binding.editName.text.toString().first().uppercase(),
+                                            image = ColorUtils.getRandomColor()
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
                     }
+
                 }
 
 
