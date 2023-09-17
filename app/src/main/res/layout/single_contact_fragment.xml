@@ -7,16 +7,41 @@
     android:id="@+id/contactView"
     android:padding="16dp">
 
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@color/black"
-        android:layout_marginEnd="15dp"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp">
 
 
-    <!-- Contact Name -->
+        <TextView
+            android:id="@+id/tv_letter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J"
+            android:textColor="@color/white"
+            android:elevation="15dp"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/contact_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_gravity="center"
@@ -26,7 +51,7 @@
         android:textSize="18sp"
         android:textStyle="bold"/>
 
-    <!-- Contact Surname -->
+
     <TextView
         android:id="@+id/tv_surname"
         android:layout_gravity="center"
@@ -36,7 +61,7 @@
         android:textSize="18sp"
         android:layout_marginStart="16dp"/>
 
-    <!-- Contact Phone Number -->
+
 
 
 </LinearLayout>
