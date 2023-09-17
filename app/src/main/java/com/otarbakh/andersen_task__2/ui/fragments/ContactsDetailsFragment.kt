@@ -61,7 +61,8 @@ class ContactsDetailsFragment :
                                         binding.editName.text.toString(),
                                         binding.ediSurname.text.toString(),
                                         binding.tvPhone.text.toString(),
-                                        letterInCircle = binding.editName.text.toString().first().uppercase()
+                                        letterInCircle = binding.editName.text.toString().first().uppercase(),
+                                        image = ColorUtils.getRandomColor()
                                     )
                                 )
                             }

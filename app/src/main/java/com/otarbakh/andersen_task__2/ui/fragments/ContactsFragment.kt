@@ -121,7 +121,6 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
             contactsDetailsFragment.arguments = bundle
 
-
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fullScreen_fragment, contactsDetailsFragment)
             transaction.addToBackStack(null)
