@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.otarbakh.andersen_task__2.R
 import com.otarbakh.andersen_task__2.common.BaseFragment
+import com.otarbakh.andersen_task__2.common.ColorUtils
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
@@ -59,7 +60,8 @@ class ContactsDetailsFragment :
                                         data.id,
                                         binding.editName.text.toString(),
                                         binding.ediSurname.text.toString(),
-                                        binding.tvPhone.text.toString()
+                                        binding.tvPhone.text.toString(),
+                                        letterInCircle = binding.editName.text.toString().first().uppercase()
                                     )
                                 )
                             }
@@ -86,7 +88,9 @@ class ContactsDetailsFragment :
                             receiveID!!,
                             name = binding.editName.text.toString(),
                             surname = binding.ediSurname.text.toString(),
-                            phoneNumber = binding.editNumber.text.toString()
+                            phoneNumber = binding.editNumber.text.toString(),
+                            letterInCircle = binding.editName.text.toString().first().uppercase().toString(),
+                            image = ColorUtils.getRandomColor()
                         )
                     )
                 }

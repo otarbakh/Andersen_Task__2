@@ -2,25 +2,17 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.DOWN
-import androidx.recyclerview.widget.ItemTouchHelper.LEFT
-import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
-import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.otarbakh.andersen_task__2.common.Constants.idBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.nameBundleKey
 import com.otarbakh.andersen_task__2.common.Constants.numberBundleKey
@@ -28,13 +20,14 @@ import com.otarbakh.andersen_task__2.common.Constants.surnameBundleKey
 import com.otarbakh.andersen_task__2.ui.adapter.ContactsAdapter
 import com.otarbakh.andersen_task__2.R
 import com.otarbakh.andersen_task__2.common.BaseFragment
+import com.otarbakh.andersen_task__2.common.ColorUtils
 import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentBinding::inflate) {
@@ -44,8 +37,6 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
     override fun viewCreated() {
         getContacts()
-
-
     }
 
 
@@ -53,6 +44,35 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
         gotoDetails()
         searchContactByQuery()
         delete()
+        deleteAll()
+        insertAll()
+    }
+
+    private fun deleteAll(){
+        binding.deleteall.setOnClickListener {
+            viewModel.deleteall()
+        }
+    }
+
+    private fun insertAll(){
+        binding.deleteall.setOnLongClickListener {
+            for (i in 1..100) {
+                val randomColor = ColorUtils.getRandomColor()
+                val name = "Contact$i"
+                val firstLetter = name.substring(0, 1)
+
+                val contact = ContactsDetail(
+                    id = i,
+                    name = name,
+                    surname = "Surname",
+                    phoneNumber = "123-456-7890",
+                    image = randomColor,
+                    letterInCircle = firstLetter
+                )
+                viewModel.insert(contact)
+            }
+            true
+        }
     }
 
     private fun getContacts() {
@@ -62,22 +82,6 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                 viewModel.getContactsFromViewModel()
                 viewModel.state.collectLatest {
                     contactsAdapter.submitList(it)
-
-                    if (it.isEmpty()) {
-                        for (i in 1..100) {
-                            val id = i
-                            val name = "name $i"
-                            val sureName = "Surname $i"
-                            val phoneNumber = "PhoneNumber $i"
-
-                            val contact = ContactsDetail(id, name, sureName, phoneNumber)
-                            delay(100)
-                            viewModel.insert(contact)
-                        }
-                    } else {
-
-                    }
-
                 }
             }
         }

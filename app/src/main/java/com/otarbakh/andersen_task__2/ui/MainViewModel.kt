@@ -65,4 +65,9 @@ class MainViewModel @Inject constructor(
             contactsRepository.deleteContact(contact)
         }
     }
+    fun deleteall() {
+        viewModelScope.launch(Dispatchers.IO) {
+            contactsRepository.deleteAll()
+        }
+    }
 }

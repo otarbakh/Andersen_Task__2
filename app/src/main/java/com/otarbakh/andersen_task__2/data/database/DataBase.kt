@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 
 
-@Database(entities = [ContactsDetail::class], version = 1)
+@Database(entities = [ContactsDetail::class], version = 2)
 abstract class DataBase : RoomDatabase() {
     abstract val userDao: UserDao
 
