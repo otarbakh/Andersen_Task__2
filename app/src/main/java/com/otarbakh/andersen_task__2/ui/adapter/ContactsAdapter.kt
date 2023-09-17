@@ -2,6 +2,7 @@ package com.otarbakh.andersen_task__2.ui.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -26,10 +27,12 @@ class ContactsAdapter :
         val binding =
             SingleContactFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ContactsViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: ContactsViewHolder, position: Int) {
         holder.bindData()
+
     }
 
 

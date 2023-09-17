@@ -2,6 +2,7 @@ package com.otarbakh.andersen_task__2.ui.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -31,6 +32,7 @@ import com.otarbakh.andersen_task__2.data.model.ContactsDetail
 import com.otarbakh.andersen_task__2.databinding.ContactsFragmentBinding
 import com.otarbakh.andersen_task__2.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -42,6 +44,8 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
     override fun viewCreated() {
         getContacts()
+
+
     }
 
 
@@ -59,6 +63,22 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                 viewModel.state.collectLatest {
                     contactsAdapter.submitList(it)
 
+                    if (it.isEmpty()) {
+                        Log.d("Jeims", "empty")
+                        for (i in 1..100) {
+                            val id = i
+                            val name = "name $i"
+                            val sureName = "Surname $i"
+                            val phoneNumber = "PhoneNumber $i"
+
+                            val contact = ContactsDetail(id,name, sureName,phoneNumber)
+                            delay(100)
+                            viewModel.insert(contact)
+                        }
+                    } else {
+                        Log.d("Jimsher", "notEmpty")
+                    }
+
                 }
             }
         }
@@ -75,7 +95,7 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                 )
         }
         val divider = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
-        ResourcesCompat.getDrawable(resources, R.drawable.divider,null)?.let {
+        ResourcesCompat.getDrawable(resources, R.drawable.divider, null)?.let {
             divider.setDrawable(it)
         }
         binding.rvContacts.addItemDecoration(divider)
