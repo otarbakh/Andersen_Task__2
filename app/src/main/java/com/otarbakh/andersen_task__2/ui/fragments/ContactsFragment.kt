@@ -64,19 +64,18 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                     contactsAdapter.submitList(it)
 
                     if (it.isEmpty()) {
-                        Log.d("Jeims", "empty")
                         for (i in 1..100) {
                             val id = i
                             val name = "name $i"
                             val sureName = "Surname $i"
                             val phoneNumber = "PhoneNumber $i"
 
-                            val contact = ContactsDetail(id,name, sureName,phoneNumber)
+                            val contact = ContactsDetail(id, name, sureName, phoneNumber)
                             delay(100)
                             viewModel.insert(contact)
                         }
                     } else {
-                        Log.d("Jimsher", "notEmpty")
+
                     }
 
                 }
