@@ -5,4 +5,6 @@
     <string name="undo">Undo</string>
     <string name="delete_contact_confirmation">Delete Contact?</string>
     <string name="deleted">deleted!</string>
+    <string name="do_you_really_want_to_delete_contact">Do you really want to delete contact ?</string>
+    <string name="you_kept_your_contact">you kept your Contact!</string>
 </resources>

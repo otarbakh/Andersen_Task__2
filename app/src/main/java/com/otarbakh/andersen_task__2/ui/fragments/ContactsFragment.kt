@@ -130,7 +130,27 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
 
     private fun delete() {
         contactsAdapter.setOnDeleteClickListener { contactsDetail, i ->
-            viewModel.delete(contactsDetail)
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setMessage(getString(R.string.do_you_really_want_to_delete_contact))
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        viewModel.delete(contactsDetail)
+                        Toast.makeText(requireContext(), R.string.deleted, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.you_kept_your_contact),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            builder.show()
+
         }
     }
 

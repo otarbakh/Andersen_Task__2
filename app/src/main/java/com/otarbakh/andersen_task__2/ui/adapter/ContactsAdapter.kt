@@ -47,6 +47,7 @@ class ContactsAdapter :
                     itemClickForDeleteListener.invoke(model!!, adapterPosition)
                     true
                 }
+
             }
         }
 
