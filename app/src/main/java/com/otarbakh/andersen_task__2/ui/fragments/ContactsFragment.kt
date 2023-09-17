@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.DOWN
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
@@ -72,6 +74,11 @@ class ContactsFragment : BaseFragment<ContactsFragmentBinding>(ContactsFragmentB
                     false
                 )
         }
+        val divider = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
+        ResourcesCompat.getDrawable(resources, R.drawable.divider,null)?.let {
+            divider.setDrawable(it)
+        }
+        binding.rvContacts.addItemDecoration(divider)
     }
 
     private fun gotoDetails() {
