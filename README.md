@@ -1,15 +1,11 @@
 
 
-
-The goal of this Template is to be our starting point for new projects, following the best development practices. It's our interpretation and adaptation of the official [architecture](https://developer.android.com/topic/architecture) guidelines provided by Google. And it's inspired by Google's [NowInAndroid](https://github.com/android/nowinandroid).
-
 ## Clean architecture with 2 main modules
 - Data (for database, API and preferences code)
 - AndroidApp (for UI logic, with MVVM)
 
-![Screenshot_20230917_154550](https://github.com/otarbakh/Andersen_Task__2/assets/87203322/9f087995-c17b-4e8b-811f-4c3f100e0749)
+<![Screenshot_20230917_154550](https://github.com/otarbakh/Andersen_Task__2/assets/87203322/9f087995-c17b-4e8b-811f-4c3f100e0749)  width="60%" height="30%">
 ![Screenshot_20230917_154617](https://github.com/otarbakh/Andersen_Task__2/assets/87203322/71e51a19-eeb9-4896-ba61-f9803683a98d)
-
 ![Screenshot_20230917_154645](https://github.com/otarbakh/Andersen_Task__2/assets/87203322/991b7b34-23c7-4577-a3f3-33f213b02ac7)
 
     
